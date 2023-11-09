@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "kode": "BM001",
+    "nama": "Gandum",
+    "stock": 100
+  },
+  {
+    "id": 2,
+    "kode": "BM002",
+    "nama": "Tepung Terigu",
+    "stock": 150
+  },
+  {
+    "id": 3,
+    "kode": "BM003",
+    "nama": "Gula Pasir",
+    "stock": 200
+  },
+  {
+    "id": 4,
+    "kode": "BM004",
+    "nama": "Susu",
+    "stock": 50
+  },
+  {
+    "id": 5,
+    "kode": "BM005",
+    "nama": "Daging Ayam",
+    "stock": 75
+  },
+  {
+    "id": 6,
+    "kode": "BM006",
+    "nama": "Telur",
+    "stock": 120
+  },
+  {
+    "id": 7,
+    "kode": "BM007",
+    "nama": "Beras",
+    "stock": 80
+  },
+  {
+    "id": 8,
+    "kode": "BM008",
+    "nama": "Sayuran",
+    "stock": 60
+  },
+  {
+    "id": 9,
+    "kode": "BM009",
+    "nama": "Mie Instan",
+    "stock": 90
+  },
+  {
+    "id": 10,
+    "kode": "BM010",
+    "nama": "Minyak Goreng",
+    "stock": 70
+  },
+  {
+    "id": 11,
+    "kode": "MN001",
+    "nama": "Air Mineral",
+    "stock": 120
+  },
+  {
+    "id": 12,
+    "kode": "MN002",
+    "nama": "Kopi",
+    "stock": 80
+  },
+  {
+    "id": 13,
+    "kode": "MN003",
+    "nama": "Teh",
+    "stock": 100
+  },
+  {
+    "id": 14,
+    "kode": "MN004",
+    "nama": "Soda",
+    "stock": 60
+  },
+  {
+    "id": 15,
+    "kode": "MN005",
+    "nama": "Jus Jeruk",
+    "stock": 70
+  },
+  {
+    "id": 16,
+    "kode": "MN006",
+    "nama": "Minuman Energi",
+    "stock": 50
+  },
+  {
+    "id": 17,
+    "kode": "MN007",
+    "nama": "Coklat",
+    "stock": 90
+  },
+  {
+    "id": 18,
+    "kode": "MN008",
+    "nama": "Air Kelapa",
+    "stock": 110
+  },
+  {
+    "id": 19,
+    "kode": "MN009",
+    "nama": "Susu Coklat",
+    "stock": 40
+  },
+  {
+    "id": 20,
+    "kode": "MN010",
+    "nama": "Es Krim",
+    "stock": 65
+  }
+]

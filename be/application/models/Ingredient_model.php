@@ -23,8 +23,12 @@ class Ingredient_model extends CI_Model {
      * @return Response
     */
     public function create($data)
-    {
-        $this->db->insert_batch('product_ingredients', $data);
+    {   
+        $product_id = $data["ingredients"][0]["product_id"];
+        // hapus data dulu
+        $this->db->delete("product_ingredients", ['product_id' => $product_id]);
+        // baru input data baru
+        $this->db->insert_batch('product_ingredients', $data["ingredients"]);
         return $this->db->affected_rows();
     }
     

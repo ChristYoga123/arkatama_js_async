@@ -62,8 +62,7 @@ class Ingredients extends REST_Controller {
     */
     public function index_post()
     {
-        $data = json_decode(trim(file_get_contents('php://input')), true);
-        $_POST = $data;
+        $data = $this->post();
         // ------- Main Logic part -------
         $result = $this->Ingredient_model->create($data);
         if($result > 0)
