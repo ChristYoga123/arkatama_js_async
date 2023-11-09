@@ -455,17 +455,26 @@
 								</div>
 								`
 							)
+						})
 
-							// jika stok bahan diketik di atas stok bahan maka akan muncul swal
-							$(`#ingredient_qty_${ingredient.ingredient_code}`).on("keyup", function () {
-								if(parseInt($(`#ingredient_qty_${ingredient.ingredient_code}`).val()) > parseInt(ingredient.amount))
-								{
-									swal("Stok bahan tidak mencukupi", {
-										icon: "error",
-									});
-									$(`#ingredient_qty_${ingredient.ingredient_code}`).val(parseInt(ingredient.amount));
-								}
-							})
+						// cek jika stok diketik di atas stok bahan.json maka akan muncul swal
+						$.ajax({
+							url: "http://localhost/js-async/fe/assets/js/bahan.json",
+							dataType: "json",
+							success: function (response) {
+								data.data.map(ingredient => {
+									const bahan = response.filter(item => item.kode == ingredient.ingredient_code)
+									$(`#ingredient_qty_${ingredient.ingredient_code}`).on("keyup", function () {
+										if(parseInt($(`#ingredient_qty_${ingredient.ingredient_code}`).val()) > parseInt(bahan[0].stock))
+										{
+											swal("Stok bahan tidak mencukupi", {
+												icon: "error",
+											});
+											$(`#ingredient_qty_${ingredient.ingredient_code}`).val(parseInt(bahan[0].stock));
+										}
+									})
+								})
+							}
 						})
 					},
 					statusCode: {
@@ -699,23 +708,6 @@
 					`
 				)
 
-				// cek jika stok diketik di atas stok maka akan muncul swal
-				$.ajax({
-					url: "http://localhost/js-async/fe/assets/js/bahan.json",
-					dataType: "json",
-					success: function (response) {
-						const bahan = response.filter(item => item.kode == $("#bahan_code").val())
-						$(`#ingredient_qty_${$("#bahan_code").val()}`).on("keyup", function () {
-							if(parseInt($(`#ingredient_qty_${$("#bahan_code").val()}`).val()) > parseInt(bahan[0].stock))
-							{
-								swal("Stok bahan tidak mencukupi", {
-									icon: "error",
-								});
-								$(`#ingredient_qty_${$("#bahan_code").val()}`).val(parseInt(bahan[0].stock));
-							}
-						})
-					}
-				})
 				ingredients.push({
 					"ingredient_code" : $("#bahan_code").val(),
 					"ingredient_name": $("#bahan_name").val(),
@@ -737,14 +729,21 @@
 		// hapus bahan dari DOM
 		$(event.target).parent().remove();
 
-		// jika stok bahan diketik di atas stok bahan maka akan muncul swal
-		$(`#ingredient_qty_${kode}`).on("keyup", function () {
-			if(parseInt($(`#ingredient_qty_${kode}`).val()) > parseInt(ingredient.amount))
-			{
-				swal("Stok bahan tidak mencukupi", {
-					icon: "error",
-				});
-				$(`#ingredient_qty_${kode}`).val(parseInt(ingredient.amount));
+		// jika stok diketik di atas stok di bahan.json maka akan muncul swal
+		$.ajax({
+			url: "http://localhost/js-async/fe/assets/js/bahan.json",
+			dataType: "json",
+			success: function (response) {
+				const bahan = response.filter(item => item.kode == kode)
+				$(`#ingredient_qty_${kode}`).on("keyup", function () {
+					if(parseInt($(`#ingredient_qty_${kode}`).val()) > parseInt(bahan[0].stock))
+					{
+						swal("Stok bahan tidak mencukupi", {
+							icon: "error",
+						});
+						$(`#ingredient_qty_${kode}`).val(parseInt(bahan[0].stock));
+					}
+				})
 			}
 		})
 	}
