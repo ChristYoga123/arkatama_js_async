@@ -299,6 +299,26 @@
 		$("table#pilih-bahan").DataTable().destroy();
 	});
 
+	// jika stok diketik di atas stok bahan.json maka akan muncul swal
+	$.ajax({
+		url: "http://localhost/js-async/fe/assets/js/bahan.json",
+		dataType: "json",
+		success: function (response) {
+			ingredients.map(ingredient => {
+				const bahan = response.filter(item => item.kode == ingredient.ingredient_code)
+				$(`#ingredient_qty_${ingredient.ingredient_code}`).on("keyup", function () {
+					if(parseInt($(`#ingredient_qty_${ingredient.ingredient_code}`).val()) > parseInt(bahan[0].stock))
+					{
+						swal("Stok bahan tidak mencukupi", {
+							icon: "error",
+						});
+						$(`#ingredient_qty_${ingredient.ingredient_code}`).val(parseInt(bahan[0].stock));
+					}
+				})
+			})
+		}
+	})
+
 	function tutupModalProduk()
 	{
 		$("#modalProduk").modal("hide");
@@ -443,6 +463,7 @@
 					dataType: "json",
 					success: function(data)
 					{
+						$(".output").empty();
 						data.data.map(ingredient => {
 							ingredients.push(ingredient);
 							$(".output").append(
