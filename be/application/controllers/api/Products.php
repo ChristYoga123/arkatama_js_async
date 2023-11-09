@@ -102,7 +102,7 @@ class Products extends REST_Controller {
     */
     public function index_put($id)
     {
-        $data = json_decode(trim(file_get_contents('php://input')), true);
+        $data = $this->_put_args;
         $this->form_validation->set_data($data);
         // ------- Main Logic part -------
         // set validation rules

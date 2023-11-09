@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Atlantis Lite Bootstrap Dashboard</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="stylesheet" href="assets/css/atlantis.min.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
+	<script>
+		WebFont.load({
+			google: {"families":["Lato:300,400,700,900"]},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['assets/css/fonts.min.css']},
+			active: function() {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/atlantis.min.css">
+	<link href="assets/styles.css" rel="stylesheet" />
+	<link href="assets/prism.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="wrapper">
+		<div class="main-header">
+			<div class="logo-header" data-background-color="light-blue2">
+				<a href="index.html" class="logo">
+					<img src="assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">
+						<i class="icon-menu"></i>
+					</span>
+				</button>
+				<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+				<div class="nav-toggle">
+					<button class="btn btn-toggle toggle-sidebar">
+						<i class="icon-menu"></i>
+					</button>
+				</div>
+			</div>
+			<nav class="navbar navbar-header navbar-expand-lg" data-background-color="light-blue2">
+				<div class="container-fluid">
+					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+						<li class="nav-item">
+							<a href="examples/demo1" class="nav-link">
+								Live Preview
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="sidebar sidebar-style-2">
+			<div class="sidebar-background"></div>
+			<div class="sidebar-wrapper scrollbar scrollbar-inner">
+				<div class="sidebar-content">
+					<ul class="nav nav-info">
+						<li class="nav-item active">
+							<a href="index.html">
+								<i class="fas fa-home"></i>
+								<p>Dashboard</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="main-panel">
+			<div class="content content-documentation">
+				<div class="container-fluid">
+					<div class="card card-documentation">
+						<div class="card-header bg-info-gradient text-white bubble-shadow">
+							<h4>Implementasi JS Async</h4>
+						</div>
+						<div class="card-body">
+							<!-- Button trigger modal -->
+							<button type="button" onclick="pilihKategori()" class="btn btn-primary" data-toggle="modal" data-target="#modalProduk">
+								Tambah Produk
+							</button>
+							<div class="d-flex justify-content-between mt-3">
+								<button type="button" onclick="pilihProduk()" class="btn btn-primary" data-toggle="modal" data-target="#modalPilihProduk">
+									Pilih Produk
+								</button>
+
+								<input type="text" class="form-control ml-2" id="product_code" disabled placeholder="Kode Produk">
+								<input type="text" class="form-control ml-2" id="product_name" disabled placeholder="Nama Produk">
+								<input type="number" class="form-control ml-2" id="qty" placeholder="Qty">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Produk -->
+	<div class="modal fade" id="modalProduk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Tambah Produk</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="buat-produk">
+						<div class="form-group">
+							<label>Kode</label>
+							<input type="text" class="form-control" placeholder="Kode Produk" name="product_code">
+						</div>
+						<div class="form-group">
+							<label>Nama</label>
+							<input type="text" class="form-control" placeholder="Nama Produk" name="product_name">
+						</div>
+						<div class="form-group">
+							<label>Kategori</label>
+							<select class="form-control" name="category_id">
+								<option value="" disabled selected>Pilih Kategori</option>
+								<!-- SELECT diisi API -->
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Harga</label>
+							<input type="number" min="1" class="form-control" placeholder="Harga Produk" name="price">
+						</div>
+						<div class="form-group">
+							<label>Stok</label>
+							<input type="number" min="1" class="form-control" placeholder="Stok Produk" name="quantity">
+						</div>
+						<div class="form-group">
+							<label>Deskripsi</label>
+							<textarea class="form-control" name="description"></textarea>
+						</div>
+						<button type="button" onclick="buatProduk()" id="button-tambah-edit" class="btn btn-primary mt-3 ml-2">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Pilih Produk -->
+	<div class="modal fade" id="modalPilihProduk" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Pilih Produk</h5>
+					<button type="button" class="close" data-dismiss="modal" onclick="tutupModal()" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table id="pilih-produk" class="display table table-striped table-hover" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th>Kode</th>
+									<th>Nama</th>
+									<th>Harga</th>
+									<th>Stok</th>
+									<th>Aksi</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Content diisi API -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+<script src="assets/js/core/jquery.3.2.1.min.js"></script>
+<!-- Sweet Alert -->
+<script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+<!-- Datatables -->
+<script src="assets/js/plugin/datatables/datatables.min.js"></script>
+<script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+<script src="assets/js/core/popper.min.js"></script>
+<script src="assets/js/core/bootstrap.min.js"></script>
+<script src="assets/js/plugin/chart.js/chart.min.js"></script>
+<script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+<script src="assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+<script type="text/javascript" src="assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+<script type="text/javascript" src="assets/js/plugin/jqvmap/maps/jquery.vmap.world.js" charset="utf-8"></script>
+<script src="assets/js/plugin/chart-circle/circles.min.js"></script>
+<script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<script src="assets/js/atlantis.min.js"></script>
+<script src="documentation/assets/prism.js"></script>
+<script src="documentation/assets/prism-normalize-whitespace.min.js"></script>
+<script>
+	// jika modal di close maka datatable akan di destroy
+	$('#modalPilihProduk').on('hidden.bs.modal', function () {
+		$("table#pilih-produk").DataTable().destroy();
+	});
+	function tutupModal()
+	{
+		$("#modalProduk").modal("hide");
+		// reinisialisasi datatable
+		$("table#pilih-produk").DataTable().destroy();
+	}
+	function pilihKategori()
+	{
+		$("#modalProduk .modal-title").text("Tambah Produk");
+		// nullkan isi form
+		$("form#buat-produk")[0].reset();
+		// empty select tapi beri option Pilih KAtegori disabled selected
+		$('select[name=category_id]').empty().append(`<option value="" disabled selected>Pilih Kategori</option>`);		
+		$.ajax({
+			method: "GET",
+			url: "http://localhost/js-async/be/api/categories",
+			dataType: "json",
+			success: function (response) {
+				response.data.forEach(function (item) {
+					$('select[name=category_id]').append(`<option value="${item.category_id}">${item.category_name}</option>`);
+				});
+			}
+		});
+	}
+
+	function buatProduk()
+	{
+		$.ajax({
+			method: "POST",
+			url: "http://localhost/js-async/be/api/products",
+			data: $("form#buat-produk").serialize(),
+			success: function (response) {
+				$("form#buat-produk")[0].reset();
+				$("#modalProduk").modal("hide");
+				swal(response.message, {
+					icon: "success",
+				});
+			},
+			statusCode: {
+				400: function (xhr) {
+					if(xhr.responseJSON.error.product_code)
+					{
+						swal(xhr.responseJSON.error.product_code, {
+							icon: "error",
+						});
+					}
+					if(xhr.responseJSON.error.product_name)
+					{
+						swal(xhr.responseJSON.error.product_name, {
+							icon: "error",
+						});
+					}
+					if(xhr.responseJSON.error.category_id)
+					{
+						swal(xhr.responseJSON.error.category_id, {
+							icon: "error",
+						});
+					}
+					if(xhr.responseJSON.error.price)
+					{
+						swal(xhr.responseJSON.error.price, {
+							icon: "error",
+						});
+					}
+					if(xhr.responseJSON.error.quantity)
+					{
+						swal(xhr.responseJSON.error.quantity, {
+							icon: "error",
+						});
+					}
+					if(xhr.responseJSON.error.description)
+					{
+						swal(xhr.responseJSON.error.description, {
+							icon: "error",
+						});
+					}
+				}
+			}
+		})
+	}
+
+	function pilihProduk()
+	{
+		$.ajax({
+			method: "GET",
+			url: "http://localhost/js-async/be/api/products",
+			dataType: "json",
+			success: function (response) {
+				$("table#pilih-produk").DataTable({
+					data: response.data,
+					columns: [
+						{data: "product_code"},
+						{data: "product_name"},
+						{data: "price"},
+						{data: "quantity"},
+					],
+					order: [[ 0, "desc" ]],
+					// buat kolom aksi dapat memuat 3 button yaitu Detail, Edit, Delete
+					columnDefs: [
+						{
+							targets: 4,
+							render: function (data, type, row, meta) {
+								return `
+									<div class="d-flex">
+										<button type="button" onclick="selectProduk(${row.product_id})" class="btn btn-primary btn-sm">Pilih</button>
+										<button type="button" onclick="editProduk(${row.product_id})" class="btn btn-warning btn-sm ml-2" data-dismiss="modal">Edit</button>
+										<button type="button" onclick="deleteProduk(${row.product_id})" class="btn btn-danger btn-sm ml-2">Hapus</button>
+									</div>
+								`;
+							}
+						},
+					]
+				});
+			}
+		});
+	}
+
+	function selectProduk(id)
+	{
+		$("#modalPilihProduk").modal("hide");
+		$.ajax({
+			method: "GET",
+			url: `http://localhost/js-async/be/api/products/${id}`,
+			dataType: "json",
+			success: function (response) {
+				$("#product_code").val(response.data.product_code);
+				$("#product_name").val(response.data.product_name);
+				$("#qty").val(1);
+			}
+		});
+	}
+
+	function deleteProduk(id)
+	{
+		swal({
+			title: "Apakah anda yakin?",
+			text: "Setelah dihapus, Anda tidak akan dapat memulihkan data ini!",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+		})
+		.then((willDelete) => {
+			if(willDelete)
+			{
+				$.ajax({
+					method: "DELETE",
+					url: `http://localhost/js-async/be/api/products/${id}`,
+					dataType: "json",
+					success: function (response) {
+						swal(response.message, {
+							icon: "success",
+						});
+						// reinisialisasi datatable
+						$("table#pilih-produk").DataTable().destroy();
+						pilihProduk();
+					}
+				});
+			}
+		});
+	}
+
+	function editProduk(id)
+	{
+		$("#modalProduk").modal("show");
+		// berikan scroll pada modal
+		$("#modalProduk").css("overflow-y", "auto");
+		$("#modalProduk .modal-title").text("Edit Produk");
+		$('select[name=category_id]').empty().append(`<option value="" disabled selected>Pilih Kategori</option>`);		
+		$.ajax({
+			method: "GET",
+			url: `http://localhost/js-async/be/api/products/${id}`,
+			dataType: "json",
+			success: function (response) {
+				// isi data kategori
+				$.ajax({
+					method: "GET",
+					url: "http://localhost/js-async/be/api/categories",
+					dataType: "json",
+					success: function (response) {
+						response.data.forEach(function (item) {
+							$('select[name=category_id]').append(`<option value="${item.category_id}">${item.category_name}</option>`);
+						});
+					}
+				
+				})
+				$("input[name=product_code]").val(response.data.product_code);
+				$("input[name=product_name]").val(response.data.product_name);
+				$("select[name=category_id]").val(response.data.category_id);
+				$("input[name=price]").val(response.data.price);
+				$("input[name=quantity]").val(response.data.quantity);
+				$("textarea[name=description]").val(response.data.description);
+				$("button#button-tambah-edit").attr("onclick", `updateProduk(${response.data.product_id})`);
+			}
+		});
+	}
+
+	function updateProduk(id)
+		{
+			$.ajax({
+				method: "PUT",
+				url: `http://localhost/js-async/be/api/products/${id}`,
+				data: $("form#buat-produk").serialize(),
+				success: function (response) {
+					$("form#buat-produk")[0].reset();
+					$("#modalProduk").modal("hide");
+					swal(response.message, {
+						icon: "success",
+					});
+					// reinisialisasi datatable
+					$("table#pilih-produk").DataTable().destroy();
+				},
+				statusCode: {
+					400: function (xhr) {
+						if(xhr.responseJSON.error.product_code)
+						{
+							swal(xhr.responseJSON.error.product_code, {
+								icon: "error",
+							});
+						}
+						if(xhr.responseJSON.error.product_name)
+						{
+							swal(xhr.responseJSON.error.product_name, {
+								icon: "error",
+							});
+						}
+						if(xhr.responseJSON.error.category_id)
+						{
+							swal(xhr.responseJSON.error.category_id, {
+								icon: "error",
+							});
+						}
+						if(xhr.responseJSON.error.price)
+						{
+							swal(xhr.responseJSON.error.price, {
+								icon: "error",
+							});
+						}
+						if(xhr.responseJSON.error.quantity)
+						{
+							swal(xhr.responseJSON.error.quantity, {
+								icon: "error",
+							});
+						}
+						if(xhr.responseJSON.error.description)
+						{
+							swal(xhr.responseJSON.error.description, {
+								icon: "error",
+							});
+						}
+					}
+				}
+			})
+		
+		}
+</script>
+<script type="text/javascript">
+	// Optional
+	Prism.plugins.NormalizeWhitespace.setDefaults({
+		'remove-trailing': true,
+		'remove-indent': true,
+		'left-trim': true,
+		'right-trim': true,
+	});
+	
+	// handle links with @href started with '#' only
+	$(document).on('click', 'a[href^="#"]', function(e) {
+		// target element id
+		var id = $(this).attr('href');
+
+		// target element
+		var $id = $(id);
+		if ($id.length === 0) {
+			return;
+		}
+
+		// prevent standard hash navigation (avoid blinking in IE)
+		e.preventDefault();
+
+		// top position relative to the document
+		var pos = $id.offset().top - 80;
+
+		// animated top scrolling
+		$('body, html').animate({scrollTop: pos});
+	});
+</script>
+</html>
