@@ -69,8 +69,7 @@ class Products extends REST_Controller {
     */
     public function index_post()
     {
-        $data = json_decode(trim(file_get_contents('php://input')), true);
-        $_POST = $data;
+        $data = $this->_post_args;
         // set validation rules
         $this->form_validation->set_rules('product_code', 'Kode', 'required|is_unique[products.product_code]');                
         $this->form_validation->set_rules('product_name', 'Nama', 'required');                

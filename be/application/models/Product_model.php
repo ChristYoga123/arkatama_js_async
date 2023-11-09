@@ -13,7 +13,8 @@ class Product_model extends CI_Model {
 
     public function all()
     {
-        $data = $this->db->get("products");
+        $this->db->order_by('product_id', 'DESC');
+        $data = $this->db->get('products');
         return $data->result();
     }
 
